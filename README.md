@@ -41,11 +41,13 @@ Vanilla JavaScript, HTML5 and CSS3. No build step and no dependencies.
 
 ```
 files/
-|-- index.html          # Page layout (Joker and Mona art are embedded)
+|-- index.html          # Page layout
 |-- style.css           # Persona 5-style theme
 |-- script.js           # Game logic, AI, match scoring
-`-- character_pics/
-    `-- futaba.jpg      # Futaba opponent art
+`-- character_pics/     # Character art
+    |-- joker_pic.png
+    |-- mona_pic.png
+    `-- futaba_pic.png
 docs/
 `-- screenshot.png
 ```
