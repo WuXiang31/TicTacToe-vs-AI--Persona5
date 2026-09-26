@@ -176,7 +176,7 @@ function applyOpponentTheme(opp) {
         monaCard.classList.add('futaba-card');
         monaArtImg.src = 'character_pics/futaba.jpg';
         monaArtImg.style.objectFit = 'cover';
-        monaArtImg.style.objectPosition = 'top center';
+        monaArtImg.style.objectPosition = 'center 40%';
         monaArtImg.style.background = '#1a3a1a';
         monaArtImg.style.display = '';
         // Remove emoji fallback if present
