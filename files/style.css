@@ -107,6 +107,10 @@
             transition: 0.15s;
         }
 
+        #sfx-btn {
+            min-width: 110px;
+        }
+
         .header-btn:hover {
             background: white;
             color: var(--red);

@@ -24,6 +24,62 @@ const modeRulesText  = document.querySelector('#mode-rules-text');
 const monaArtImg     = document.querySelector('.mona-art-wrap img');
 const MONA_IMG_SRC   = monaArtImg.src; // original Mona art, saved before any opponent swap
 
+// ── SOUND ──────────────────────────────────────────────────────
+// Sound effects are synthesized with Web Audio, so no files are needed.
+const sfxBtn = document.querySelector('#sfx-btn');
+
+function loadPref(key) {
+    try { return localStorage.getItem(key) !== 'off'; } catch { return true; }
+}
+function savePref(key, on) {
+    try { localStorage.setItem(key, on ? 'on' : 'off'); } catch {}
+}
+
+let sfxOn    = loadPref('sfx');
+let audioCtx = null;
+
+function updateSfxButton() {
+    sfxBtn.textContent = `SFX: ${sfxOn ? 'On' : 'Off'}`;
+}
+
+function toggleSfx() {
+    sfxOn = !sfxOn;
+    savePref('sfx', sfxOn);
+    updateSfxButton();
+}
+
+function tone(freq, start, dur, type = 'square', vol = 0.12) {
+    const t   = audioCtx.currentTime + start;
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t);
+    gain.gain.setValueAtTime(vol, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start(t);
+    osc.stop(t + dur);
+}
+
+const SFX = {
+    x:    () => tone(660, 0, 0.12, 'square', 0.08),
+    o:    () => tone(440, 0, 0.14, 'triangle', 0.15),
+    win:  () => [523, 659, 784, 1047].forEach((f, i) => tone(f, i * 0.1, 0.25)),
+    lose: () => [392, 330, 262, 196].forEach((f, i) => tone(f, i * 0.14, 0.3, 'sawtooth', 0.08)),
+    draw: () => [330, 330].forEach((f, i) => tone(f, i * 0.18, 0.15, 'triangle', 0.15)),
+};
+
+function playSfx(name) {
+    if (!sfxOn) return;
+    try {
+        audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        SFX[name]();
+    } catch {}
+}
+
+updateSfxButton();
+
 // ── OPPONENTS ──────────────────────────────────────────────────
 const OPPONENTS = {
     mona: {
@@ -290,6 +346,7 @@ function tapCell(cell, index) {
 function updateCell(cell, index) {
     cell.textContent = player;
     inputCells[index] = player;
+    playSfx(player === 'X' ? 'x' : 'o');
     cell.classList.add(player === 'X' ? 'x-cell' : 'o-cell');
     cell.classList.add('placed');
     setTimeout(() => cell.classList.remove('placed'), 300);
@@ -385,6 +442,9 @@ function handleRoundWin(line) {
     const opp  = OPPONENTS[opponent];
     const p2Name = mode === 'PVP' ? 'Player 2' : opp.name;
 
+    // In PVP either player winning is a "win"; in PVE losing to the AI plays the lose sound
+    playSfx(isP1 || mode === 'PVP' ? 'win' : 'lose');
+
     if (isP1) {
         p1RoundWins++;
         showWinFlash(matchPoints === 1 ? 'PHANTOM\nSTRIKE!' : 'ROUND\nJOKER!');
@@ -419,6 +479,7 @@ function handleDraw() {
     missionStatus.textContent = 'Standoff';
     tauntText.textContent     = "We're evenly matched!";
     showWinFlash('DRAW!');
+    playSfx('draw');
     setTimeout(() => { restartBtn.classList.add('visible'); }, 1600);
 }
 
