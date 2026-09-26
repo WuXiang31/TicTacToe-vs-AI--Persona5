@@ -22,6 +22,7 @@ const matchScoreP1   = document.querySelector('#match-score-p1');
 const matchScoreP2   = document.querySelector('#match-score-p2');
 const modeRulesText  = document.querySelector('#mode-rules-text');
 const monaArtImg     = document.querySelector('.mona-art-wrap img');
+const MONA_IMG_SRC   = monaArtImg.src; // original Mona art, saved before any opponent swap
 
 // ── OPPONENTS ──────────────────────────────────────────────────
 const OPPONENTS = {
@@ -118,10 +119,8 @@ function updateModeRules() {
 function goToOpponentPick() {
     modeCard.style.display = 'none';
     opponentCard.style.display = 'flex';
-    // Populate Mona portrait from the live game panel
-    const monaImg = document.querySelector('.mona-art-wrap img');
     const oppMonaImg = document.querySelector('#opp-mona-img');
-    if (monaImg && oppMonaImg) oppMonaImg.src = monaImg.src;
+    if (oppMonaImg) oppMonaImg.src = MONA_IMG_SRC;
 }
 
 function goBackToMode() {
@@ -175,7 +174,7 @@ function applyOpponentTheme(opp) {
     if (opp === 'futaba') {
         monaArtWrap.classList.add('futaba-theme');
         monaCard.classList.add('futaba-card');
-        monaArtImg.src = 'futaba.jpg';
+        monaArtImg.src = 'character_pics/futaba.jpg';
         monaArtImg.style.objectFit = 'cover';
         monaArtImg.style.objectPosition = 'top center';
         monaArtImg.style.background = '#1a3a1a';
@@ -186,9 +185,7 @@ function applyOpponentTheme(opp) {
     } else {
         monaArtWrap.classList.remove('futaba-theme');
         monaCard.classList.remove('futaba-card');
-        // Restore Mona's original src from the opp picker
-        const oppMonaImg = document.querySelector('#opp-mona-img');
-        if (oppMonaImg && oppMonaImg.src) monaArtImg.src = oppMonaImg.src;
+        monaArtImg.src = MONA_IMG_SRC;
         monaArtImg.style.objectFit = 'contain';
         monaArtImg.style.objectPosition = '';
         monaArtImg.style.background = '#cc0010';
