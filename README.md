@@ -49,3 +49,15 @@ files/
 docs/
 `-- screenshot.png
 ```
+
+## Credits
+
+Special thanks to **[ATLUS](https://atlus.com/)** and **[SEGA](https://www.sega.com/)** for creating the Persona series. All credit for the original characters, artwork and style goes to them.
+
+The art style is inspired by Persona 5 from the Persona series. I'm a big fan of the game! You guys should try out the Persona_5 game. You guys will LOVE IT!!!
+
+Persona 5 and its characters (Joker, Mona, Futaba) belong to ATLUS and SEGA. This is a non-commercial fan project and is not affiliated with or endorsed by ATLUS or SEGA.
+
+Official links:
+- [Persona series official site](https://persona.atlus.com/)
+- [Persona 5 Royal official site](https://persona.atlus.com/p5r/)

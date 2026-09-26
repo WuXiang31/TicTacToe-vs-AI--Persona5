@@ -908,14 +908,13 @@
             position: relative;
         }
 
-        .opp-mona-bg  { background: #cc0010; }
-        .opp-futaba-bg { background: #1a3a1a; }
+        .opp-mona-bg,
+        .opp-futaba-bg { background: #fff; }
 
         .opp-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            object-position: top center;
+            object-fit: contain;
         }
 
         .opp-fallback-icon {

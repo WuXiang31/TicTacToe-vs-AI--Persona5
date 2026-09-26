@@ -174,10 +174,10 @@ function applyOpponentTheme(opp) {
     if (opp === 'futaba') {
         monaArtWrap.classList.add('futaba-theme');
         monaCard.classList.add('futaba-card');
-        monaArtImg.src = 'character_pics/futaba.jpg';
-        monaArtImg.style.objectFit = 'cover';
-        monaArtImg.style.objectPosition = 'center 40%';
-        monaArtImg.style.background = '#1a3a1a';
+        monaArtImg.src = 'character_pics/futaba_pic.png';
+        monaArtImg.style.objectFit = 'contain';
+        monaArtImg.style.objectPosition = '';
+        monaArtImg.style.background = '#fff';
         monaArtImg.style.display = '';
         // Remove emoji fallback if present
         const futabaArt = monaArtWrap.querySelector('.futaba-art');
@@ -188,7 +188,7 @@ function applyOpponentTheme(opp) {
         monaArtImg.src = MONA_IMG_SRC;
         monaArtImg.style.objectFit = 'contain';
         monaArtImg.style.objectPosition = '';
-        monaArtImg.style.background = '#cc0010';
+        monaArtImg.style.background = '#fff';
         monaArtImg.style.display = '';
     }
 }
