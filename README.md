@@ -2,6 +2,8 @@
 
 A browser-based Tic-Tac-Toe game styled after Persona 5. Play as Joker against an AI opponent (Mona or Futaba) or against a friend on the same screen.
 
+**[Play it online](https://wuxiang31.github.io/TicTacToe-vs-AI--Persona5/)**
+
 ![Gameplay screenshot](docs/screenshot.png)
 
 ## Features
@@ -33,7 +35,7 @@ Vanilla JavaScript, HTML5 and CSS3. No build step and no dependencies.
 
 ## How to Play
 
-1. Open `files/index.html` in a browser.
+1. Play it [online](https://wuxiang31.github.io/TicTacToe-vs-AI--Persona5/), or open `files/index.html` in a browser.
 2. Pick a board size and a mode. In PVE, also pick an opponent.
 3. Joker plays **X** and moves first. Get the required number in a row to win the round.
 
